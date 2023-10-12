@@ -15,11 +15,13 @@ const Home = ({publications}) => {
         setMostrar(!mostrar)
     }
 
+    const sortedPublications = [...(publications ?? [])].sort((a, b) => b.timestamp - a.timestamp);
+
     return (
         <>
                     <div className="flex my-8 mx-4 sm:mx-24">
                     <div className="w-full sm:w-1/2">
-                    {(publications ?? []).slice(0,1).map((publication, index) => {
+                    {(sortedPublications ?? []).slice(0,1).map((publication, index) => {
                     return(
                         <Link to={`/publication/${publication.id}`}><div key={index} className="m-4 cursor-pointer border border-gray-200 shadow-lg rounded py-6 px-6">
                             <img className="w-full h-auto rounded-b transition-transform duration-300 transform hover:scale-110 pb-6" src={publication.image} alt="imagen"/>
@@ -43,7 +45,7 @@ const Home = ({publications}) => {
                     </div>
             </div>
             <div className="grid my-8 mx-4 sm:mx-24 grid-cols-1 sm:grid-cols-3">
-                {(publications ?? []).slice(1,shownCount).map((publication, index) => {
+                {(sortedPublications ?? []).slice(1,shownCount).map((publication, index) => {
                     return(
                         <Link to={`/publication/${publication.id}`}><div key={index} className="m-4 cursor-pointer border border-gray-200 shadow-lg rounded py-6 px-6">
                             <img className="w-full h-56 rounded-b transition-transform duration-300 transform hover:scale-110 pb-6" src={publication.image} alt="imagen"/>

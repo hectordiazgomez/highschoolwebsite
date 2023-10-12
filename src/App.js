@@ -12,10 +12,13 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 import PublicationDetail from "./components/PublicationDetail";
 import {db} from "./firebase-config";
 import {storage} from "./firebase-config";
-import {getDownloadURL, listAll, ref, uploadBytes} from "firebase/storage";
-import {collection, getDocs, addDoc } from "firebase/firestore";
+import { firebase } from 'firebase/app';
 import { v4 } from "uuid";
 import Nuevaseccion from "./components/nuevasecccion";
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL, listAll} from 'firebase/storage';
+
 
 
 function App() {
@@ -24,36 +27,12 @@ function App() {
   const [imageList, setImageList] = useState([]);
   const [_imageUrl,setImageUrl] = useState(null)
   const imageListRef = ref(storage, "images/publications.jpg")
-  // const uploadImage = () => {
-
-  //   console.log(imageUpload,"imageUploadimageUpload")
-  //    if (imageUpload == null) return;
-  //    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-  //    uploadBytes(imageRef, imageUpload).then(() => {
-  //     alert("Published")
-  //    })
-  // };
 
   const uploadImage = async () => {
     if (!imageUpload) return;
 
     try {
       console.log("Publicación lista")
-      // Upload the image to Firebase Storage
-      // const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-      // await uploadBytes(imageRef, imageUpload);
-
-      // Get the download URL of the uploaded image
-      // const downloadURL = await getDownloadURL(imageRef);
-      // setImageUrl(downloadURL)
-
-      // Store the metadata (e.g., download URL) in Firestore
-      // const docRef = await addDoc(collection(db, 'publications'), {
-      //   imageUrl: downloadURL,
-      //   timestamp: new Date(), 
-      // });
-
-      // console.log('Image uploaded and metadata stored in Firestore with ID: ', docRef.id);
     } catch (error) {
       console.error('Error uploading image: ', error);
     }
@@ -85,12 +64,18 @@ function App() {
 
   const createPublication = async () => {
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-      await uploadBytes(imageRef, imageUpload);
-      // Get the download URL of the uploaded image
-      const downloadURL = await getDownloadURL(imageRef);
-      await addDoc(publicationsRef, {title: newTitle, image: downloadURL, description: newDescription, maintext: newMainText,timestamp: new Date() })
-      alert("Publicación lista")
-    }
+    await uploadBytes(imageRef, imageUpload);
+    const downloadURL = await getDownloadURL(imageRef);
+    await addDoc(publicationsRef, {
+      title: newTitle,
+      image: downloadURL,
+      description: newDescription,
+      maintext: newMainText,
+      timestamp: serverTimestamp() // Use serverTimestamp() here
+    });
+    alert("Publicación lista");
+  }
+
 
   useEffect(() => {
       const getPublications = async () =>{
@@ -100,6 +85,7 @@ function App() {
           console.log("Listo")
       }
       getPublications();
+      console.log(publications);
   }, [])
 
   return (
