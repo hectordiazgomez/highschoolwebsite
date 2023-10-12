@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.netlify.josedesanmartin.twa",
+        "sha256_cert_fingerprints": ["61:CC:8B:F7:5C:04:CD:0D:6C:0F:94:CA:BA:BA:1B:B3:19:07:68:AA:84:FB:F6:81:5F:E4:96:67:D0:04:F9:52"]
+      }
+    }]
