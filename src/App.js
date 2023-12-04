@@ -56,11 +56,13 @@ function App() {
   const [newImage, setNewImage] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [newMainText, setMainText] = useState("");
+  const [newUrl, setNewUrl] = useState("");
 
   const [publications, setPublications] = useState([]);
   const publicationsRef = collection(db, "publications");
- 
-  const navigate = useNavigate();
+  const [videos, setVideos] = useState([])
+  const videosRef = collection(db, "videos");
+
 
   const createPublication = async () => {
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
@@ -76,6 +78,14 @@ function App() {
     alert("Publicación lista");
   }
 
+  const subirVideo = async () => {
+    await addDoc(videosRef, {
+      url: newUrl,
+      timestamp: serverTimestamp()
+    });
+    alert("Video listo");
+  }
+
 
   useEffect(() => {
       const getPublications = async () =>{
@@ -84,7 +94,16 @@ function App() {
           console.log(publications);
           console.log("Listo")
       }
+
+    const getVideos = async () => {
+      const data = await getDocs(videosRef);
+      setVideos(data?.docs?.map((doc) => ({ ...doc.data(), id: doc.id })));
+      console.log(videos);
+      console.log("Listo")
+    }
+
       getPublications();
+      getVideos()
       console.log(publications);
   }, [])
 
@@ -94,13 +113,13 @@ function App() {
     <Routes>
     <Route path="/" element={<Home publications={publications} />} />
     <Route path="/login" element={<Login/>} />
-    <Route path="/admin" element={<Admin setImageUpload={setImageUpload} uploadImage={uploadImage} createPublication={createPublication} newMainText={newMainText} setNewImage={setNewImage} setNewTitle={setNewTitle} setNewDescription={setNewDescription} setMainText={setMainText}  />} />
+        <Route path="/admin" element={<Admin subirVideo={subirVideo} setNewUrl={setNewUrl} newUrl={newUrl} setImageUpload={setImageUpload} uploadImage={uploadImage} createPublication={createPublication} newMainText={newMainText} setNewImage={setNewImage} setNewTitle={setNewTitle} setNewDescription={setNewDescription} setMainText={setMainText}  />} />
     <Route path="/history" element={<History/>} />
     <Route path="/authorities" element={<Authorities/>} />
     <Route path="/contact" element={<Contact/>} />
     <Route path="/publication" element={<Publication/>} />
     <Route path="/publication/:id" element={<PublicationDetail publications={publications} />} />
-    <Route path="/nuevaseccion" element={<Nuevaseccion/>} />
+    <Route path="/gallery" element={<Nuevaseccion videos={videos} />} />
     </Routes>
     <Footer/>
     </>

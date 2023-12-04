@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-const Admin = ({ createPublication, setImageUpload, setNewImage, uploadImage, setNewTitle, setNewDescription, newMainText, setMainText }) => {
+const Admin = ({ subirVideo, setNewUrl, newUrl, createPublication, setImageUpload, setNewImage, uploadImage, setNewTitle, setNewDescription, newMainText, setMainText }) => {
     return(
         <div>
             <div className="flex justify-center pt-8">
@@ -15,13 +15,13 @@ const Admin = ({ createPublication, setImageUpload, setNewImage, uploadImage, se
                 <p className="text-gray-500 italic text-lg font-semibold">Título</p>
             </div>
             <div>
-                <input onChange={(event) => {setNewTitle(event.target.value)}} className="border-2 shadow-lg w-full sm:w-2/3 my-2 font-medium border-blue-300 text-gray-600 rounded outline-none px-2 py-1" />
+                <input placeholder="Ingrese el título" onChange={(event) => {setNewTitle(event.target.value)}} className="border-2 shadow-lg w-full sm:w-2/3 my-2 font-medium border-blue-300 text-gray-600 rounded outline-none px-2 py-1" />
             </div>
             <div>
                 <p className="text-gray-500 italic text-lg font-semibold">Subtítulo</p>
             </div>
             <div>
-                <input onChange={(event) => {setNewDescription(event.target.value)}} className="border-2 shadow-lg w-full sm:w-2/3 my-2 font-medium border-blue-300 text-gray-600 rounded outline-none px-2 py-1" />
+                <input placeholder="Ingrese el subtítulo" onChange={(event) => {setNewDescription(event.target.value)}} className="border-2 shadow-lg w-full sm:w-2/3 my-2 font-medium border-blue-300 text-gray-600 rounded outline-none px-2 py-1" />
             </div>
             <div>
                 <p className="text-gray-500 italic text-lg font-semibold">Imágen</p>
@@ -37,6 +37,7 @@ const Admin = ({ createPublication, setImageUpload, setNewImage, uploadImage, se
         value={newMainText}
         onChange={event => setMainText(event.target.value)}
         rows={12} 
+        placeholder="Ingrese su texto acá"
         className="border-2 w-11/12 sm:w-2/3 my-2 border-blue-300 font-medium text-gray-600 rounded outline-none px-2 py-1"
         style={{ whiteSpace: 'pre-wrap' }}
       />
@@ -45,6 +46,27 @@ const Admin = ({ createPublication, setImageUpload, setNewImage, uploadImage, se
                 <button onClick={() => {uploadImage(); createPublication()}} className="px-8 py-3 text-lg rounded-xl bg-blue-700 hover:bg-blue-500 text-white font-semibold">Publicar</button>
             </div>
             </div>
+            <div className="flex justify-center py-8">
+                <hr className="border-2 border-gray-300 w-2/3"></hr>
+            </div>
+            </div>
+            <div className="flex justify-center">
+                <div className="w-2/3 py-12">
+                    <p className="text-xl text-blue-600 font-semibold">Agregar videos</p>
+                </div>
+            </div>
+            <div className="flex justify-center">
+                <div className="w-2/3">
+                    <div className="pb-12">
+                        <input 
+                            value={newUrl}
+                            onChange={(event) => setNewUrl(event.target.value)}
+                        placeholder="Ingrese el link" className="border-2 shadow-lg w-full sm:w-2/3 my-2 font-medium border-blue-300 text-gray-600 rounded outline-none px-2 py-1" />
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-center pb-24">
+                <button onClick={() => subirVideo()} className="px-8 py-3 text-lg rounded-xl bg-blue-700 hover:bg-blue-500 text-white font-semibold">Publicar video</button>
             </div>
         </div>
     )
