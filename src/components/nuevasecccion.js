@@ -1,8 +1,9 @@
 import React from "react";
 
-const Nuevaseccion = ({videos}) => {
+const Nuevaseccion = ({ videos, imagenes }) => {
 
     const sortedPublications = [...(videos ?? [])].sort((a, b) => b.timestamp - a.timestamp);
+    const sortedImages = [...(imagenes ?? [])].sort((a, b) => b.timestamp - a.timestamp);
 
     return(
         <>
@@ -16,6 +17,13 @@ const Nuevaseccion = ({videos}) => {
                             return (
                                 <div className="flex py-6 justify-center">
                                     <iframe className="w-4/5 h-64 rounded" src={`https://www.youtube.com/embed/${publication.url}`} ></iframe>
+                                </div>
+                            );
+                        })}
+                        {(sortedImages ?? []).map((publication, index) => {
+                            return (
+                                <div className="flex py-6 justify-center">
+                                    <img className="w-4/5 h-64 rounded" src={publication.url} ></img>
                                 </div>
                             );
                         })}

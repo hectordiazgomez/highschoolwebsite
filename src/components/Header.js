@@ -26,7 +26,7 @@ const Header = () => {
         <Link to="/"><p className="text-white cursor-pointer hover:text-gray-200 py-3 text-lg font-semibold">Publicaciones</p></Link>
         </div>
         <div className="w-full sm:w-3/5 items-center grid grid-cols-4">
-        <Link to="/gallery"><div className="flex cursor-pointer  justify-center text-white hover:bg-white hover:text-blue-800 py-6 sm:py-3">
+        <Link to="/videos"><div className="flex cursor-pointer  justify-center text-white hover:bg-white hover:text-blue-800 py-6 sm:py-3">
         <p className="sm:text-lg font-semibold">Galería</p>
         </div></Link>
         <Link to="/history"><div className="flex cursor-pointer  justify-center text-white hover:bg-white hover:text-blue-800 py-6 sm:py-3">

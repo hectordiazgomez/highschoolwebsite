@@ -15,6 +15,7 @@ import {storage} from "./firebase-config";
 import { firebase } from 'firebase/app';
 import { v4 } from "uuid";
 import Nuevaseccion from "./components/nuevasecccion";
+import Gallery from "./components/Gallery";
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL, listAll} from 'firebase/storage';
@@ -57,11 +58,14 @@ function App() {
   const [newDescription, setNewDescription] = useState("");
   const [newMainText, setMainText] = useState("");
   const [newUrl, setNewUrl] = useState("");
+  const [location, setLocation] = useState("")
 
   const [publications, setPublications] = useState([]);
   const publicationsRef = collection(db, "publications");
   const [videos, setVideos] = useState([])
   const videosRef = collection(db, "videos");
+  const [imagenes, setImagenes] = useState([])
+  const imagenesRef = collection(db, "imagenes")
 
 
   const createPublication = async () => {
@@ -86,6 +90,14 @@ function App() {
     alert("Video listo");
   }
 
+  const subirImagen = async () => {
+    await addDoc(imagenesRef, {
+      url: location,
+      timestamp: serverTimestamp()
+    });
+    alert("Imagen lista")
+  }
+
 
   useEffect(() => {
       const getPublications = async () =>{
@@ -102,8 +114,16 @@ function App() {
       console.log("Listo")
     }
 
+    const getImages = async () => {
+      const data = await getDocs(imagenesRef);
+      setImagenes(data?.docs?.map((doc) => ({ ...doc.data(), id: doc.id })));
+      console.log(imagenes);
+      console.log("Listo")
+    }
+
       getPublications();
       getVideos()
+      getImages()
       console.log(publications);
   }, [])
 
@@ -113,13 +133,14 @@ function App() {
     <Routes>
     <Route path="/" element={<Home publications={publications} />} />
     <Route path="/login" element={<Login/>} />
-        <Route path="/admin" element={<Admin subirVideo={subirVideo} setNewUrl={setNewUrl} newUrl={newUrl} setImageUpload={setImageUpload} uploadImage={uploadImage} createPublication={createPublication} newMainText={newMainText} setNewImage={setNewImage} setNewTitle={setNewTitle} setNewDescription={setNewDescription} setMainText={setMainText}  />} />
+        <Route path="/admin" element={<Admin subirImagen={subirImagen} location={location} setLocation={setLocation} subirVideo={subirVideo} setNewUrl={setNewUrl} newUrl={newUrl} setImageUpload={setImageUpload} uploadImage={uploadImage} createPublication={createPublication} newMainText={newMainText} setNewImage={setNewImage} setNewTitle={setNewTitle} setNewDescription={setNewDescription} setMainText={setMainText}  />} />
     <Route path="/history" element={<History/>} />
     <Route path="/authorities" element={<Authorities/>} />
     <Route path="/contact" element={<Contact/>} />
     <Route path="/publication" element={<Publication/>} />
     <Route path="/publication/:id" element={<PublicationDetail publications={publications} />} />
-    <Route path="/gallery" element={<Nuevaseccion videos={videos} />} />
+        <Route path="/videos" element={<Nuevaseccion imagenes={imagenes} videos={videos} />} />
+    <Route path="/gallery" element={<Gallery imagenes={imagenes} />} />
     </Routes>
     <Footer/>
     </>
