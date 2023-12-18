@@ -40,7 +40,7 @@ const Header = () => {
                 </div>
             )}
 
-        <div className="px-5 bg-blue-900 flex sm:flex-row hidden">
+        <div className="px-5 bg-blue-900 flex sm:flex hidden">
         <div className="w-2/5 hidden sm:flex justify-center">
         <Link to="/"><p className="text-white cursor-pointer hover:text-gray-200 py-3 text-lg font-semibold">Publicaciones</p></Link>
         </div>
