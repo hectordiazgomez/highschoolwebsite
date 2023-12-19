@@ -5,7 +5,7 @@ const Authorities = () => {
         <div className="flex justify-center py-16">
     <div className="w-2/3 ">
         <div>
-            <p className="text-blue-600 my-8 text-xl">Autoridades distritales</p>
+            <p className="text-blue-600 my-8 text-xl">Autoridades locales</p>
             <p className="my-4 italic text-gray-500 text-lg"><a className="font-semibold">Alcaldesa:</a> Leyla Condorachay Soto</p>
             <p  className="my-4 italic text-gray-500 text-lg"><a className="font-semibold">Juez de Paz:</a> Pascual Condorachay Vásquez</p>
             <p  className="my-4 italic text-gray-500 text-lg"><a className="font-semibold">Jefe del Par Progreso:</a> Paulino Santillán Calongos</p>
