@@ -132,7 +132,7 @@ function App() {
     <Routes>
     <Route path="/" element={<Home publications={publications} />} />
     <Route path="/login" element={<Login/>} />
-        <Route path="/admin" element={<Admin subirImagen={subirImagen} location={location} setLocation={setLocation} subirVideo={subirVideo} setNewUrl={setNewUrl} newUrl={newUrl} setImageUpload={setImageUpload} uploadImage={uploadImage} createPublication={createPublication} newMainText={newMainText} setNewImage={setNewImage} setNewTitle={setNewTitle} setNewDescription={setNewDescription} setMainText={setMainText}  />} />
+        <Route path="/admin" element={<Admin imagenes={imagenes} left={videos} subirImagen={subirImagen} location={location} setLocation={setLocation} subirVideo={subirVideo} setNewUrl={setNewUrl} newUrl={newUrl} setImageUpload={setImageUpload} uploadImage={uploadImage} createPublication={createPublication} newMainText={newMainText} setNewImage={setNewImage} setNewTitle={setNewTitle} setNewDescription={setNewDescription} setMainText={setMainText}  />} />
     <Route path="/history" element={<History/>} />
     <Route path="/authorities" element={<Authorities/>} />
     <Route path="/contact" element={<Contact/>} />

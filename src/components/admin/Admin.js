@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
-const Admin = ({ subirVideo, subirImagen, location, setLocation, setNewUrl, newUrl, createPublication, setImageUpload, setNewImage, uploadImage, setNewTitle, setNewDescription, newMainText, setMainText }) => {
-   
+const Admin = ({ subirVideo, imagenes, left, subirImagen, location, setLocation, setNewUrl, newUrl, createPublication, setImageUpload, setNewImage, uploadImage, setNewTitle, setNewDescription, newMainText, setMainText }) => {
+
     const [posts, setPosts] = useState(true);
     const [videos, setVideos] = useState(false);
     const [images, setImages] = useState(false);
@@ -23,6 +23,14 @@ const Admin = ({ subirVideo, subirImagen, location, setLocation, setNewUrl, newU
         setVideos(false)
         setImages(true)
     }
+
+    const deleteUser = async (id) => {
+
+}
+
+
+    const sortedPublications = [...(left ?? [])].sort((a, b) => b.timestamp - a.timestamp);
+    const sortedImages = [...(imagenes ?? [])].sort((a, b) => b.timestamp - a.timestamp);
 
     return(
         <div>
