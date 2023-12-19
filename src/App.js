@@ -15,7 +15,6 @@ import {storage} from "./firebase-config";
 import { firebase } from 'firebase/app';
 import { v4 } from "uuid";
 import Nuevaseccion from "./components/nuevasecccion";
-import Gallery from "./components/Gallery";
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL, listAll} from 'firebase/storage';
@@ -140,7 +139,6 @@ function App() {
     <Route path="/publication" element={<Publication/>} />
     <Route path="/publication/:id" element={<PublicationDetail publications={publications} />} />
         <Route path="/videos" element={<Nuevaseccion imagenes={imagenes} videos={videos} />} />
-    <Route path="/gallery" element={<Gallery imagenes={imagenes} />} />
     </Routes>
     <Footer/>
     </>

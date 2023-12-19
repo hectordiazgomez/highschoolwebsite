@@ -12,7 +12,7 @@ const Nuevaseccion = ({ videos, imagenes }) => {
                 <div className="pt-32 flex justify-center pb-20">
                     <p className="text-2xl font-semibold text-blue-600 font-semibold">EXPLORA NUESTRA GALERÍA</p>
                 </div>
-                <div className="grid pb-12 grid-cols-3">
+                <div className="grid pb-12 grid-cols-1 sm:grid-cols-3">
                         {(sortedPublications ?? []).map((publication, index) => {
                             return (
                                 <div className="flex py-6 justify-center">
@@ -23,7 +23,7 @@ const Nuevaseccion = ({ videos, imagenes }) => {
                         {(sortedImages ?? []).map((publication, index) => {
                             return (
                                 <div className="flex py-6 justify-center">
-                                    <img className="w-4/5 h-64 rounded" src={publication.url} ></img>
+                                    <img className="w-4/5 h-64 object-cover rounded" src={publication.url} ></img>
                                 </div>
                             );
                         })}
